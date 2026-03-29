@@ -1,5 +1,5 @@
 # Multi-fidelity Shape Optimization Toolbox
-[![codecov](https://codecov.io/github/raphStrickling/MFoptimizationTools/graph/badge.svg?token=41FEMC1IA4)](https://codecov.io/github/raphStrickling/MFoptimizationTools)
+[![Test Coverage](https://codecov.io/github/raphStrickling/MFoptimizationTools/graph/badge.svg?token=41FEMC1IA4)](https://github.com/raphStrickling/MFoptimizationTools)
 
 The optimization toolbox is a collection of python tools and scripts for multi-fidelity shape optimization optimization with Dakota, OpenFOAM an FreeCAD
 

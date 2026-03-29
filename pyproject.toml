@@ -16,11 +16,11 @@ requires-python = ">= 3.10"
 # main dependencies are managed with conda,
 # since FreeCAD is not available through pip
 [project.optional-dependencies]
-test = ["pytest", "pytest-cov"]
+test = ["pytest", "pytest-cov", "trimesh"]
 dev = ["ruff", "pre-commit"]
 doc = ["sphinx", "sphinx-autodoc-typehints", "jupyter-book<2"]
 postproc = ["pyvista"]
-all = ["pytest", "pytest-cov", "ruff", "pre-commit", "sphinx", "sphinx-autodoc-typehints", "jupyter-book<2", "pyvista"]
+all = ["pytest", "pytest-cov", "trimesh", "ruff", "pre-commit", "sphinx", "sphinx-autodoc-typehints", "jupyter-book<2", "pyvista"]
 
 [project.scripts]
 modifyGeom = "optimizationTools.scripts:modify_geometry"

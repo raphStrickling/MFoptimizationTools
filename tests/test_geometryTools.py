@@ -1,26 +1,22 @@
 import os
 import pytest
 import numpy as np
+import trimesh
 
 import optimizationTools as ot
 
 
-def parse_stl(stl_content: str):
-    normals = []
-    vertices = []
+def compare_stls(result, reference):
+    # Compare bounding box
+    np.testing.assert_allclose(result.bounds, reference.bounds, atol=5e-4)
 
-    for line in stl_content.splitlines():
-        line = line.strip()
+    # Compare volume and surface area
+    assert abs(result.volume - reference.volume) < 1e-4
+    assert abs(result.area - reference.area) < 1e-4
 
-        if line.startswith("facet normal"):
-            entries = line.split()
-            normals.append([float(entries[-3]), float(entries[-2]), float(entries[-1])])
+    # Compare center of mass
+    np.testing.assert_allclose(result.center_mass, reference.center_mass, atol=1e-4)
 
-        elif line.startswith("vertex"):
-            entries = line.split()
-            vertices.append([float(entries[-3]), float(entries[-2]), float(entries[-1])])
-
-    return np.array(normals), np.array(vertices)
 
 
 def test_varset_modification(test_root):
@@ -87,11 +83,10 @@ def test_stl_export_gmsh(test_root, test_tmp):
             step_path=f"{test_tmp}/step/{face_name}.step", stl_path=f"{test_tmp}/stl/{face_name}.stl"
         )
         # check stl against reference
-        normals, vertices = parse_stl((test_tmp / "stl" / f"{face_name}.stl").read_text())
-        normals_ref, vertices_ref = parse_stl((test_root / "test_geometryTools" / f"{face_name}.stl").read_text())
+        result = trimesh.load_mesh(test_tmp / "stl" / f"{face_name}.stl")
+        reference = trimesh.load_mesh(test_root / "test_geometryTools" / f"{face_name}.stl")
 
-        np.testing.assert_allclose(normals, normals_ref, rtol=1e-6)
-        np.testing.assert_allclose(vertices, vertices_ref, rtol=1e-6)
+        compare_stls(result, reference)
 
 
 def test_stl_export_freecad(test_root, test_tmp):
@@ -105,10 +100,9 @@ def test_stl_export_freecad(test_root, test_tmp):
 
         ot.geometryTools.face_to_stl(doc=doc, face_name=face_name, output_path=f"{test_tmp}/stl/{face_name}.ast")
         # check generated stls against reference
-        normals, vertices = parse_stl((test_tmp / "stl" / f"{face_name}.ast").read_text())
-        normals_ref, vertices_ref = parse_stl((test_root / "test_geometryTools" / f"{face_name}.ast").read_text())
-        np.testing.assert_allclose(normals, normals_ref, rtol=1e-6)
-        np.testing.assert_allclose(vertices, vertices_ref, rtol=1e-6)
+        result = trimesh.load_mesh(test_tmp / "stl" / f"{face_name}.ast", file_type='stl')
+        reference = trimesh.load_mesh(test_root / "test_geometryTools" / f"{face_name}.ast", file_type='stl')
+        compare_stls(result, reference)
 
 
 def test_stl_merge(test_root, test_tmp):
@@ -126,14 +120,11 @@ def test_stl_merge(test_root, test_tmp):
     ot.geometryTools.merge_stls(asts_to_merge, f"{test_tmp}/stl/merged_faces_FC.stl")
 
     # check against reference
-    normals_gmsh, vertices_gmsh = parse_stl((test_tmp / "stl" / "merged_faces_gmsh.stl").read_text())
-    normals_FC, vertices_FC = parse_stl((test_tmp / "stl" / "merged_faces_FC.stl").read_text())
-    normals_gmsh_ref, vertices_gmsh_ref = parse_stl(
-        (test_root / "test_geometryTools" / "merged_faces_gmsh.stl").read_text()
-    )
-    normals_FC_ref, vertices_FC_ref = parse_stl((test_root / "test_geometryTools" / "merged_faces_FC.stl").read_text())
+    result_FC = trimesh.load_mesh(test_tmp / "stl" / f"merged_faces_FC.stl")
+    reference_FC = trimesh.load_mesh(test_root / "test_geometryTools" / f"merged_faces_FC.stl")
+    compare_stls(result_FC, reference_FC)
 
-    np.testing.assert_allclose(normals_gmsh, normals_gmsh_ref, rtol=1e-6)
-    np.testing.assert_allclose(vertices_gmsh, vertices_gmsh_ref, rtol=1e-6)
-    np.testing.assert_allclose(normals_FC, normals_FC_ref, rtol=1e-6)
-    np.testing.assert_allclose(vertices_FC, vertices_FC_ref, rtol=1e-6)
+    result_gmsh = trimesh.load_mesh(test_tmp / "stl" / f"merged_faces_gmsh.stl")
+    reference_gmsh = trimesh.load_mesh(test_root / "test_geometryTools" / f"merged_faces_gmsh.stl")
+    compare_stls(result_gmsh, reference_gmsh)
+

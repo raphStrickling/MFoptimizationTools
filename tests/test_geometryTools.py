@@ -116,11 +116,11 @@ def test_stl_merge(test_root, test_tmp):
     with pytest.raises(FileNotFoundError):
         ot.geometryTools.merge_stls(nonexisting_stls, f"{test_tmp}/stl/merged.stl")
 
-    stls_to_merge = {"face_sphere": f"{test_tmp}/stl/face_sphere.stl", "face_cube": f"{test_tmp}/stl/face_cube.stl"}
+    stls_to_merge = {"face_sphere": f"{test_root}/test_geometryTools/face_sphere.stl", "face_cube": f"{test_root}/test_geometryTools/face_cube.stl"}
     # merge .stls from gmsh
     ot.geometryTools.merge_stls(stls_to_merge, f"{test_tmp}/stl/merged_faces_gmsh.stl")
 
-    asts_to_merge = {"face_sphere": f"{test_tmp}/stl/face_sphere.ast", "face_cube": f"{test_tmp}/stl/face_cube.ast"}
+    asts_to_merge = {"face_sphere": f"{test_root}/test_geometryTools/face_sphere.ast", "face_cube": f"{test_root}/test_geometryTools/face_cube.ast"}
 
     # merge .stls from FreeCAD
     ot.geometryTools.merge_stls(asts_to_merge, f"{test_tmp}/stl/merged_faces_FC.stl")

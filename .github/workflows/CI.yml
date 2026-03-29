@@ -28,14 +28,14 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Install toolbox
       run: |
-        conda env update --file environment.yml
-        pip install -e .[test]
+        conda env create --file environment.yml
     - name: Test with pytest
       run: |
-        pip install -e .[test]
-        pytest .
+        conda run -n geom_opt pip install -e .[test]
+        conda run -n geom_opt pytest .
     - name: Deploy documentation
       run: |
+        conda activate geom_opt
         pip install -e .[doc]
         cd doc/
         sh build_doc.sh

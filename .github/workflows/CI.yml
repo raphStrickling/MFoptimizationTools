@@ -32,7 +32,7 @@ jobs:
     - name: Test with pytest
       run: |
         conda run -n geom_opt pip install -e .[test]
-        conda run -n geom_opt pytest .
+        conda run -n geom_opt pytest . --cov-report=xml
     - name: Deploy documentation
       run: |
         conda run -n geom_opt pip install -e .[doc]
@@ -47,3 +47,8 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./doc/_build/html
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false

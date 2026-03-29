@@ -1,5 +1,4 @@
 # Multi-fidelity Shape Optimization Toolbox
-![pipeline](https://git.rwth-aachen.de/stfs/codes/geometry-optimization/badges/refactor/pipeline.svg) ![coverage](https://git.rwth-aachen.de/stfs/codes/geometry-optimization/badges/refactor/coverage.svg)
 
 The optimization toolbox is a collection of python tools and scripts for multi-fidelity shape optimization optimization with Dakota, OpenFOAM an FreeCAD
 

@@ -35,10 +35,11 @@ jobs:
         conda run -n geom_opt pytest .
     - name: Deploy documentation
       run: |
-        conda activate geom_opt
-        pip install -e .[doc]
+        conda run -n geom_opt pip install -e .[doc]
         cd doc/
-        sh build_doc.sh
+        rm -rf _build
+        conda run -n geom_opt sphinx-apidoc -o content/modules/ ../optimizationTools/ -E -d 3 -P -M -f --implicit-namespace
+        conda run -n geom_opt jupyter-book build . --toc _toc.yml
         cd -
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

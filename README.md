@@ -5,8 +5,6 @@ The optimization toolbox is a collection of python tools and scripts for multi-f
 ## Usage and Documentation
 You can find an example optimization case in the [examples directory](./examples/).
 
-For information about the code, please visit the [documentation page](https://stfs.pages.rwth-aachen.de/codes/geometry-optimization)
-
 ## Installation
 It is recommended to install the optimization toolbox with conda. Please use the provided `environment.yml` file for the installation.
 

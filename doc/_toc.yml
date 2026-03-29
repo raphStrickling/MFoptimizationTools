@@ -1,0 +1,25 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: content/00_intro/intro
+title: Introduction
+
+parts:
+
+- caption: "optimizationTools Package"
+  chapters:
+    - file: content/modules/optimizationTools.geometryTools.rst
+      title: "geometryTools"
+    - file: content/modules/optimizationTools.scripts.rst
+      title: "scripts" 
+    - file: content/modules/optimizationTools.surrogateTools.rst
+      title: "surrogateTools"
+    - file: content/modules/optimizationTools.surrogateModels.rst
+      title: "surrogateModels"
+
+- caption: "FreeCAD"
+  chapters:
+    - file: content/01_freecad_macros/macros.md
+      title: "Custom macros"
+

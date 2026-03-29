@@ -1,0 +1,38 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: MF Optimization Tools
+author: Raphael Strickling
+logo: content/figures/logo.svg
+copyright: "2026"
+
+exclude_patterns: [build, .DS_Store]
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: 'off'
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+  latex_enginge: xelatex
+
+# sphinx extensions, e.g. docstrings
+sphinx:
+  extra_extensions:
+    - 'sphinx.ext.autodoc'
+    - 'sphinx.ext.napoleon'
+    - 'sphinx.ext.viewcode'
+    - 'sphinx_autodoc_typehints'
+  config:
+    project: "Optimization Tools"
+
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+# html:
+#   favicon: "content/figures/favicon.png"
+#   use_issues_button: true
+#   use_repository_button: true

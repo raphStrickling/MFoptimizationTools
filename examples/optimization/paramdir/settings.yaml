@@ -1,0 +1,37 @@
+### GEOMETRIC SETTINGS ###
+domain_length: 33.27 # mm
+
+### GEOMETRY MODIFICATION SETTINGS ###
+# file paths
+CAD_document: './freeCAD/burner.FCStd'
+mesh_output_dir: './freeCAD/stl_patches'
+step_output_dir: './freeCAD/step_patches'
+# if you change the name of the .stl file, make sure to adjust the following config files accordingly
+# + casebase/system/meshDict
+# + casebase/system/surfaceFeatureExtractDict
+# + casebase/01_runMeshing.sh
+final_mesh: './constant/triSurface/burner_wedge.stl' 
+
+# VarSet name in FreeCAD document
+varset_label: 'designVariables'
+
+# set values for parameters, optimization parameters in {}
+parameter_values: 
+    # flowbody
+    flowbodyRadius: {radius}
+    flowbodyLength: {length}
+    # H2 holes
+    holeStart: {holeStart}
+
+# boundary patches as defined in the CAD file
+boundary_patches: 
+    - 'inletAir'
+    - 'inletH2'
+    - 'wall'
+    - 'outlet'
+    - 'wedgeRight'
+    - 'wedgeLeft'
+
+# only required when running modifyGeom with the --noGmsh flag
+# stl_resolution: 0.39
+

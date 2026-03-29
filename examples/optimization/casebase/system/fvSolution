@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "(p|yPsi)"
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-07;
+        relTol          0.0001;
+    }
+
+    "(p|yPsi)Final"
+    {
+        $p;
+        tolerance       1e-07;
+        relTol          1e-7;
+    }
+
+    "(U|k|omega)"
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-06;
+        minIter         1;
+    }
+
+    "(U|k|omega)Final"
+    {
+        $U;
+        relTol          1e-06;
+    }
+}
+
+SIMPLE
+{
+    momentumPredictor   yes;
+    transonic           no;
+    nOuterCorrectors    50;
+    nCorrectors         1;
+    nNonOrthogonalCorrectors 1;
+    // consistent          yes;
+
+    residualControl
+    {
+        "(p|U|k|omega)" 1e-6;
+    }
+
+    turbOnFinalIterOnly no;
+}
+
+relaxationFactors
+{
+    fields
+    {
+        "p.*"           0.3;
+    }
+
+    equations
+    {
+        U               0.7;
+        "(k|omega).*"   0.7;
+        ".*Final"       1.0;
+    }
+}
+
+// ************************************************************************* //

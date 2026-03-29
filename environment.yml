@@ -1,0 +1,17 @@
+name: geom_opt
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - freecad=1.0.0
+  - python-gmsh
+  - numpy
+  - pyyaml
+  - scikit-learn
+  - pandas
+  - pip:
+      - -e .
+variables:
+  PATH_TO_FREECAD_LIBDIR: "'$CONDA_PREFIX'/lib"
+

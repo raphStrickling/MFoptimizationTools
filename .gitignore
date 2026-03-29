@@ -1,0 +1,17 @@
+# documentation
+doc/_build/*
+doc/content/modules/*
+
+# python
+*.egg-info*
+**/__pycache__
+build
+
+# pytest
+*.obtained.*
+.pytest_cache/
+*/tmp/*
+
+# test coverage
+.coverage
+

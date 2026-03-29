@@ -1,0 +1,95 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM GUI Project: creativeFields            |
+|  \\    /   O peration     | Version:  0.8.9.0                               |
+|   \\  /    A nd           | Web: www.c-fields.com                           |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2;
+    format ascii;
+    class dictionary;
+    location "system";
+    object meshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+maxCellSize 0.2e-3;
+
+surfaceFile "constant/triSurface/featureEdges.fms";
+
+// refine patches
+localRefinement
+{
+   wall
+    {
+        // cellSize                    0.2e-3;
+        additionalRefinementLevels  1;
+        refinementThickness         0.1e-3;
+    }
+}
+
+// refine regions by edges
+edgeMeshRefinement
+{
+    //name of refinement region
+    edges
+    {
+        edgeFile    "constant/triSurface/burner_wedge_scaled.eMesh";
+
+        // additional refinement levels to max cell size
+        additionalRefinementLevels  0;
+
+        // thickness of the refinement region away from the surface
+        refinementThickness 0.5e-4;
+    }
+}
+
+boundaryLayers
+{
+    nLayers         0;
+    thicknessRatio  1.2;
+    optimiseLayers  1;
+
+    patchBoundaryLayers
+    {
+        wall
+        {
+            nLayers         2;
+            // expansion ratio for boundary layer cells
+            thicknessRatio  1.2;
+            optimiseLayers  1;
+        }
+    }
+}
+
+// assign patch type wall to wall patch
+renameBoundary
+{
+    newPatchNames
+    {
+        // patch name in the surface mesh
+        wall
+        {
+            // keep same name
+            newName wall;
+            type    wall;
+        }
+        // wedgeLeft
+        // {
+        //     // keep same name
+        //     newName wedgeLeft;
+        //     type    wedge;
+        // }
+        // wedgeRight
+        // {
+        //     // keep same name
+        //     newName wedgeRight;
+        //     type    wedge;
+        // }
+    }
+}
+
+
+// ************************************************************************* //

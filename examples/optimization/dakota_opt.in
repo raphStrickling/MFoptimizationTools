@@ -1,0 +1,85 @@
+# Usage:
+#   dakota -i xxx.in -o run.out > stdout.out
+
+environment
+    tabular_data
+        tabular_data_file = 'table_opt.dat'
+    top_method_pointer = 'main method'
+
+method
+    id_method = 'main method'
+    surrogate_based_global
+        method_pointer = 'opt on surrogate'
+        model_pointer = 'surrogate model'
+        max_iterations = 100
+        replace_points # replace points instead of appending (recommendation of Dakota)
+
+method
+    id_method = 'opt on surrogate'
+    soga # single objective genetic algorithm
+
+model
+    id_model = 'surrogate model'
+    surrogate global
+        # import points from the design space sampling phase
+        import_points_file = 'build_points_oa_lhs_noFail.dat'
+        reuse_points all
+        truth_model_pointer = 'OpenFOAM model'
+
+        # surrogate ansatz function
+        gaussian_process surfpack
+        # save surrogate model for post-processing in Python
+        export_model
+             filename_prefix = 'surrogate_model'
+             formats text_archive algebraic_file
+
+model
+    id_model = 'OpenFOAM model'
+    single
+        interface_pointer = 'OpenFOAM'
+        variables_pointer = 'design variables'
+        responses_pointer = 'objective function'
+
+variables
+    id_variables = 'design variables'
+    continuous_design = 3
+        # must be same as in parameter yaml file
+        descriptors     'radius'        'length'       'holeStart'
+        initial_point   6.5             8               6.75
+        lower_bounds    4.5             2               5
+        upper_bounds    7               20              8.75
+    ## linear constraints: A * x <= b example
+    #   A                                     r       l       hS
+    # linear_inequality_constraint_matrix =   0       1       -1
+    #   b
+    # linear_inequality_upper_bounds =        1.5
+
+
+interface
+    id_interface = 'OpenFOAM'
+    fork
+        asynchronous
+            # during the optimization phase, only one simulation can run at a time
+            evaluation_concurrency = 1
+        allow_existing_results # prevent Dakota from erasing existing results
+        analysis_driver = 'simulator_script.sh'
+        parameters_file = 'params.in'
+         # give any name. First line: OFV1, second line OFV2, third line: constraint1 -- (Objective functions, constraints, gradients, hessians)
+        results_file    = 'results.out'
+            file_save
+        work_directory  named 'runs/run'
+            directory_tag   directory_save
+        failure_capture recover NaN # putting NaN excludes failed simulations from statistics (kriging, ANOVA)
+
+
+responses
+    id_responses = 'objective function'
+    num_objective_functions = 1
+
+    # the genetic algorithm does not use gradient information or second derivatives (hessian matrix)
+    no_gradients
+    no_hessians
+
+    # minimize the objective function
+    sense 'min'
+

@@ -1,0 +1,28 @@
+### Note
+# This setttings.yaml is incomplete for a full optimization study
+# but just contains the required information for modifyGeom to work
+
+### GEOMETRY MODIFICATION SETTINGS ###
+# file paths
+CAD_document: './freeCAD/parametric_model.FCStd'
+mesh_output_dir: './freeCAD/stl_patches'
+step_output_dir: './freeCAD/step_patches'
+final_mesh: './output/cone.stl'
+
+# VarSet name in FreeCAD document
+varset_label: 'designVariables'
+
+# values of design variables
+parameter_values: 
+    r1: 8
+    r2: 3
+    thickness: 1
+    length: 10
+    angle: 260
+
+# boundary patches as defined in the CAD file
+boundary_patches: 
+    - 'cone'
+
+stl_resolution: 0.39
+

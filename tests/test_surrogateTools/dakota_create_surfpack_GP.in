@@ -1,0 +1,64 @@
+# Usage:
+#   dakota -i xxx.in -o run.out > stdout.out
+
+environment
+    tabular_data
+        tabular_data_file = 'table_opt.dat'
+    top_method_pointer = 'main method'
+
+method
+    id_method = 'main method'
+    surrogate_based_global # used for constructing surrogate
+        method_pointer = 'opt' # not used (max iterations=0)
+        model_pointer = 'surrogate model'
+        max_iterations = 0
+
+method
+    id_method = 'opt'
+    soga # single objective genetic algorithm
+
+model
+    id_model = 'surrogate model'
+    surrogate global
+        dace_method_pointer = 'dace method'
+        gaussian_process surfpack
+        # save surrogate model for post-processing in Python
+        export_model
+             filename_prefix = 'surrogate_model'
+             formats text_archive algebraic_file
+
+method
+    id_method = 'dace method'
+    model_pointer = 'evaluate himmelblau fct'
+    # sampling method
+    dace oa_lhs
+        samples 150
+        seed 1592495842
+
+model
+    id_model = 'evaluate himmelblau fct'
+    single
+        interface_pointer = 'Python'
+        variables_pointer = 'design variables'
+        responses_pointer = 'himmelblau function'
+
+variables
+    id_variables = 'design variables'
+    continuous_design = 2
+        descriptors     'x'     'y'
+        initial_point   1       1
+        lower_bounds    -3.5    -3.5
+        upper_bounds    3.5     3.5
+
+interface
+    id_interface = 'Python'
+    python
+        analysis_driver = 'himmelblau_function.eval'
+    batch
+
+responses
+    id_responses = 'himmelblau function'
+    num_objective_functions = 1
+    no_gradients
+    no_hessians
+

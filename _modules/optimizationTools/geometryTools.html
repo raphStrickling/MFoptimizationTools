@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>optimizationTools.geometryTools &#8212; MF Optimization Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/optimizationTools/geometryTools';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/00_intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="MF Optimization Tools - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="MF Optimization Tools - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/00_intro/intro.html">
+                    Getting Started
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">optimizationTools Package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.geometryTools.html">geometryTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.surrogateTools.html">surrogateTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.surrogateModels.html">surrogateModels</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FreeCAD</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/01_freecad_macros/macros.html">Custom macros</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for optimizationTools.geometryTools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">geometryTools</span>
+<span class="sd">=============</span>
+
+<span class="sd">This package contains useful tools for modifying a FreeCAD document and handling import and export from python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># FreeCAD imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">freecad</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">FreeCAD</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">MeshPart</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">Part</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">Sketcher</span>
+
+<span class="c1"># use gmsh for stl generation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gmsh</span>
+
+
+<div class="viewcode-block" id="load_document">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.load_document">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_document</span><span class="p">(</span><span class="n">doc_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Document</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a FreeCAD document</span>
+
+<span class="sd">    :param doc_path: path to FreeCAD document (.FCStd)</span>
+<span class="sd">    :return: FreeCAD document object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">openDocument</span><span class="p">(</span><span class="n">doc_path</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_object_by_label">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.get_object_by_label">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_object_by_label</span><span class="p">(</span><span class="n">document</span><span class="p">:</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Document</span><span class="p">,</span> <span class="n">object_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find an object in a FreeCAD document by its name</span>
+
+<span class="sd">    :param document: FreeCAD document</span>
+<span class="sd">    :param object_name: name of object in FreeCAD document</span>
+<span class="sd">    :return: requested FreeCAD object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getObjectsByLabel</span><span class="p">(</span><span class="n">object_name</span><span class="p">)</span>
+
+    <span class="c1"># labels are always unique in FreeCAD</span>
+    <span class="c1"># if len == 0, the object does not exist</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No object with label </span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s2"> found in FreeCAD document </span><span class="si">{</span><span class="n">document</span><span class="o">.</span><span class="n">FileName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">this_object</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">this_object</span></div>
+
+
+
+<div class="viewcode-block" id="modify_sketch">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.modify_sketch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_sketch</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Document</span><span class="p">,</span> <span class="n">sketch</span><span class="p">,</span> <span class="n">datum_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">datum_val</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mm&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set a datum (constraint) in a sketch to a value. The datum is found by its label</span>
+
+<span class="sd">    :param doc: FreeCAD document</span>
+<span class="sd">    :param sketch: sketch object (type: Sketcher.SketchObject; no type hinting possible)</span>
+<span class="sd">    :param datum_name: name of the datum that is modified</span>
+<span class="sd">    :param datum_val: new value for the specified datum</span>
+<span class="sd">    :param unit: &#39;mm&#39; for lengths or &#39;deg&#39; for angles</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sketch</span><span class="o">.</span><span class="n">setDatum</span><span class="p">(</span><span class="n">datum_name</span><span class="p">,</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datum_val</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> in sketch </span><span class="si">{</span><span class="n">sketch</span><span class="o">.</span><span class="n">Label</span><span class="si">}</span><span class="s2"> in FreeCAD&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">recompute</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="prepare_output_directory">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.prepare_output_directory">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_output_directory</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an output directory if it does not exist yet.</span>
+
+<span class="sd">    :param path: path to directory that is checked. Should not be a path to file!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INFO: creating directory </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="prepare_output_path">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.prepare_output_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_output_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the output file is to be saved in a directory</span>
+<span class="sd">    and if true, prepare the output directory</span>
+
+<span class="sd">    :param path: path to output file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check if output path contains a directory</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span> <span class="ow">or</span> <span class="n">path</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;./&quot;</span><span class="p">):</span>
+        <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">prepare_output_directory</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="face_to_step">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.face_to_step">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">face_to_step</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Document</span><span class="p">,</span> <span class="n">face_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Export a FreeCAD FaceBinder object to a .step file</span>
+
+<span class="sd">    :param doc: FreeCAD document</span>
+<span class="sd">    :param face_name: Label of the FaceBinder object that is exported</span>
+<span class="sd">    :param output_path: path where the .step file is saved</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">facebinder_obj</span> <span class="o">=</span> <span class="n">get_object_by_label</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">face_name</span><span class="p">)</span>
+    <span class="n">prepare_output_path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="n">Part</span><span class="o">.</span><span class="n">export</span><span class="p">([</span><span class="n">facebinder_obj</span><span class="p">],</span> <span class="n">output_path</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="face_to_stl">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.face_to_stl">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">face_to_stl</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="n">FreeCAD</span><span class="o">.</span><span class="n">Document</span><span class="p">,</span> <span class="n">face_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Export a FreeCAD FaceBinder object to a .stl file using FreeCAD&#39;s .stl exporter</span>
+
+<span class="sd">    :param doc: FreeCAD document</span>
+<span class="sd">    :param face_name: Label of the FaceBinder object that is exported</span>
+<span class="sd">    :param output_path: path where the .stl file is saved</span>
+<span class="sd">    :param max_length: resolution of .stl mesh (max length of any triangle side in mm)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">facebinder_obj</span> <span class="o">=</span> <span class="n">get_object_by_label</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">face_name</span><span class="p">)</span>
+    <span class="n">prepare_output_path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+    <span class="c1"># generate mesh from part</span>
+    <span class="n">this_mesh</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">addObject</span><span class="p">(</span><span class="s2">&quot;Mesh::Feature&quot;</span><span class="p">,</span> <span class="n">face_name</span><span class="p">)</span>
+    <span class="n">this_mesh</span><span class="o">.</span><span class="n">Mesh</span> <span class="o">=</span> <span class="n">MeshPart</span><span class="o">.</span><span class="n">meshFromShape</span><span class="p">(</span><span class="n">Shape</span><span class="o">=</span><span class="n">facebinder_obj</span><span class="o">.</span><span class="n">Shape</span><span class="p">,</span> <span class="n">MaxLength</span><span class="o">=</span><span class="n">max_length</span><span class="p">)</span>
+    <span class="n">this_mesh</span><span class="o">.</span><span class="n">Label</span> <span class="o">=</span> <span class="n">face_name</span> <span class="o">+</span> <span class="s2">&quot;_mesh&quot;</span>
+
+    <span class="c1"># export to .stl</span>
+    <span class="c1"># the .stl must be written as a plain ASCII text file</span>
+    <span class="c1"># changing the extension to from .stl to .ast forces FreeCAD</span>
+    <span class="c1"># to write a plain text file</span>
+    <span class="k">if</span> <span class="s2">&quot;.ast&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">output_path</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Output path </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2"> must contain .ast (ASCII stl) extension when exporting directly to .stl without intermediate .step files&quot;</span>
+        <span class="p">)</span>
+    <span class="n">Mesh</span><span class="o">.</span><span class="n">export</span><span class="p">([</span><span class="n">this_mesh</span><span class="p">],</span> <span class="n">output_path</span><span class="p">)</span>
+
+    <span class="c1"># clean up FreeCAD document: remove intermediate mesh</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">removeObject</span><span class="p">(</span><span class="n">this_mesh</span><span class="o">.</span><span class="n">Name</span><span class="p">)</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">recompute</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="step_to_stl">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.step_to_stl">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">step_to_stl</span><span class="p">(</span><span class="n">step_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stl_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stl_resolution</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a .step file to .stl using gmsh</span>
+
+<span class="sd">    :param step_path: path to .step file</span>
+<span class="sd">    :param stl_path: path where the generated .stl file is saved</span>
+<span class="sd">    :param stl_resolution: Resolution of the triangulated mesh in the .stl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="c1"># load .step file in gmsh</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">step_path</span><span class="p">)</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">getEntities</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">stl_resolution</span><span class="p">)</span>
+
+    <span class="c1"># generate surface mesh (--&gt; parameter dim=2)</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">prepare_output_path</span><span class="p">(</span><span class="n">stl_path</span><span class="p">)</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stl_path</span><span class="p">)</span>
+    <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="merge_stls">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.geometryTools.html#optimizationTools.geometryTools.merge_stls">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_stls</span><span class="p">(</span><span class="n">stl_paths</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merge multiple .stls into one preserving their distinction by utilizing stl regions</span>
+
+<span class="sd">    :param stl_paths: dictionary faceName -&gt; stl_path</span>
+<span class="sd">    :param output_path: output path of combined .stl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># store the lines of all .stl files in a list</span>
+    <span class="n">combined_stl</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># read stls</span>
+    <span class="k">for</span> <span class="n">face_name</span><span class="p">,</span> <span class="n">stl_path</span> <span class="ow">in</span> <span class="n">stl_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">stl_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stl file </span><span class="si">{</span><span class="n">stl_path</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+
+        <span class="c1"># if the stl was created with FreeCAD (extionsion .ast), the region is called &quot;Mesh&quot;</span>
+        <span class="c1"># if the stl was created with gmsh, the region is called &quot;Created by Gmsh&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;.ast&quot;</span> <span class="ow">in</span> <span class="n">stl_path</span> <span class="ow">and</span> <span class="s2">&quot;.stl&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stl_path</span><span class="p">:</span>
+            <span class="n">region_name</span> <span class="o">=</span> <span class="s2">&quot;Mesh&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">region_name</span> <span class="o">=</span> <span class="s2">&quot;Created by Gmsh&quot;</span>
+
+        <span class="c1"># rename the stl region to the boundary patch name so that the meshing software for</span>
+        <span class="c1"># the CFD mesh recognizes the correct boundary patches</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stl_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">stl_file</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">stl_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;solid </span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;solid </span><span class="si">{</span><span class="n">face_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;endsolid </span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;endsolid </span><span class="si">{</span><span class="n">face_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">combined_stl</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">combined_stl</span><span class="p">,</span> <span class="o">*</span><span class="n">tmp</span><span class="p">]</span>
+
+    <span class="c1"># save combined stl</span>
+    <span class="n">prepare_output_path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
+        <span class="n">output_file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">combined_stl</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raphael Strickling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

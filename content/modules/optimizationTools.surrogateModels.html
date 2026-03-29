@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>optimizationTools.surrogateModels package &#8212; MF Optimization Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/modules/optimizationTools.surrogateModels';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Custom FreeCAD Macros" href="../01_freecad_macros/macros.html" />
+    <link rel="prev" title="optimizationTools.surrogateTools package" href="optimizationTools.surrogateTools.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../00_intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="MF Optimization Tools - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="MF Optimization Tools - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00_intro/intro.html">
+                    Getting Started
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">optimizationTools Package</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="optimizationTools.geometryTools.html">geometryTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizationTools.scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimizationTools.surrogateTools.html">surrogateTools</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">surrogateModels</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FreeCAD</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_freecad_macros/macros.html">Custom macros</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/modules/optimizationTools.surrogateModels.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>optimizationTools.surrogateModels package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogatemodels">surrogateModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.GaussianProcessRegression"><code class="docutils literal notranslate"><span class="pre">GaussianProcessRegression</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.GaussianProcessRegression.predict"><code class="docutils literal notranslate"><span class="pre">GaussianProcessRegression.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.MSE"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.MSE()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_beta0"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_beta0()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_mat"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_correlation_mat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_vec"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_correlation_vec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_trend_residual"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_trend_residual()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_variance"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_variance()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.construct"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.construct()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_cubic_spline"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.kernel_cubic_spline()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_exp"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.kernel_exp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.neg_log_likelihood()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.predict"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.store_coeffs"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.store_coeffs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.normalize_points"><code class="docutils literal notranslate"><span class="pre">normalize_points()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-optimizationTools.surrogateModels">
+<span id="optimizationtools-surrogatemodels-package"></span><h1>optimizationTools.surrogateModels package<a class="headerlink" href="#module-optimizationTools.surrogateModels" title="Link to this heading">#</a></h1>
+<section id="surrogatemodels">
+<h2>surrogateModels<a class="headerlink" href="#surrogatemodels" title="Link to this heading">#</a></h2>
+<p>This package contains an implementation of the hierarchical Kriging
+multi-fidelity surrogate model by Han and Görtz (2012)
+DOI: 10.2514/1.J051354</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.GaussianProcessRegression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimizationTools.surrogateModels.</span></span><span class="sig-name descname"><span class="pre">GaussianProcessRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lf_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lf_resp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Matern'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#GaussianProcessRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.GaussianProcessRegression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A wrapper around the Gaussian process regression models provided by scikit-learn.</p>
+<p>This class provides a wrapper around the Gaussian regression model generated with scikit-learn.
+The model’s predictions can be accessed using GaussianProcessRegression.predict().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lf_x</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_lf_samples</em><em>, </em><em>n_design_variables</em><em>)</em>) – low fidelity sampling points</p></li>
+<li><p><strong>lf_resp</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_lf_samples</em><em>, </em><em>1</em><em>)</em>) – low fidelity model responses corresponding to the sampling points</p></li>
+<li><p><strong>kernel</strong> (<em>str</em><em>, </em><em>optional</em>) – kernel to use for fitting the low-fidelity gaussian process. Must be one of {‘RBF’, ‘Matern’}</p></li>
+<li><p><strong>scale_input</strong> (<em>bool</em><em>, </em><em>optional</em>) – normalize model inputs (default = False)</p></li>
+<li><p><strong>scale_response</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – normalize model outputs (default = False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.GaussianProcessRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#GaussianProcessRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.GaussianProcessRegression.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predict the response of the underlying true function using the Gaussian process regression model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>points</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_points</em><em>, </em><em>n_design_variables</em><em>)</em>) – points where the Gaussian Process regression model is to be evaluated</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predictions at the requested points</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_points, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimizationTools.surrogateModels.</span></span><span class="sig-name descname"><span class="pre">hierarchicalKriging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lf_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lf_resp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_resp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_hf_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared_exponential'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lf_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Matern'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A hierarchical Kriging surrogate model for multifidelity optimization.</p>
+<p>This class implements the hierarchical Kriging model by Han and Görtz (2012) (DOI: 10.2514/1.J051354).
+The general idea is that the low fidelity points are described using a standard Kriging model. The high fidelity
+points are then described with the low fidelity kriging as a trend function and an additional stationary random process Z</p>
+<div class="math notranslate nohighlight">
+\[Y(x) = \beta_0 \hat{y}_\text{lf}(x) + Z(x)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lf_x</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_lf_samples</em><em>, </em><em>n_design_variables</em><em>)</em>) – low fidelity sampling points</p></li>
+<li><p><strong>lf_resp</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_lf_samples</em><em>, </em><em>1</em><em>)</em>) – low fidelity model responses corresponding to the sampling points</p></li>
+<li><p><strong>hf_x</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_hf_samples</em><em>, </em><em>n_design_variables</em><em>)</em>) – high fidelity sampling points</p></li>
+<li><p><strong>hf_resp</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_hf_samples</em><em>, </em><em>1</em><em>)</em>) – high fidelity model responses corresponding to the sampling points</p></li>
+<li><p><strong>scale_hf_input</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – whether or not the high fidelity input should be scaled to a unit hypercube centered at origin. This may improve the convergence because of better conditioning of the two-point correlation matrix.</p></li>
+<li><p><strong>kernel</strong> (<em>str</em><em>, </em><em>optional</em>) – specify the kernel to use for estimating the two-point correlation. Must be one of {‘squared_exponential’, ‘cubic_spline’}. Default is ‘squared_exponential’.</p></li>
+<li><p><strong>lf_kernel</strong> (<em>str</em><em>, </em><em>optional</em>) – kernel to use for fitting the low-fidelity gaussian process. Must be one of {‘RBF’, ‘Matern’}. Default is ‘Matern’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>beta0</strong> – hierarchical Kriging parameter beta0</p></li>
+<li><p><strong>theta_opt</strong> – hierarchical Kriging parameter theta</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Constructing and using a hierarchical Kriging surrogate model</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">surrogate</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">surrogateModels</span><span class="o">.</span><span class="n">hierarchicalKriging</span><span class="p">(</span><span class="n">lf_x</span><span class="p">,</span> <span class="n">lf_resp</span><span class="p">,</span> <span class="n">hf_x</span><span class="p">,</span> <span class="n">hf_resp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">surrogate</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">]]))</span>
+<span class="go">array([-0.24874606,  0.11477697])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.MSE">
+<span class="sig-name descname"><span class="pre">MSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.MSE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.MSE" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the mean square error at given points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>points</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_points</em><em>, </em><em>n_design_variables</em><em>)</em>) – vector of points where the mean square error is to be evaluated</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector of mean square errors at the requested points</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_points, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.calc_beta0">
+<span class="sig-name descname"><span class="pre">calc_beta0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R_inv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.calc_beta0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_beta0" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the hierarchical Kriging parameter beta0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>R_inv</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_design_variables</em><em>, </em><em>n_design_variables</em><em>)</em>) – inverse of the correlation matrix</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_mat">
+<span class="sig-name descname"><span class="pre">calc_correlation_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.calc_correlation_mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_mat" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the two-point correlation matrix using the specified kernel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>theta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the Kriging model. This is tuned by an optimization algorithm</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>correlation matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_design_variables, n_design_variables)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_vec">
+<span class="sig-name descname"><span class="pre">calc_correlation_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.calc_correlation_vec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_vec" title="Link to this definition">#</a></dt>
+<dd><p>calculate the two-point correlation vector of any point x with the high fidelity sampling points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span>) – arbitrary point where the two-point correlations are evaluated</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>two-point correlation vector containing the correlations of x with the high fidelity sampling points</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_design_variables, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.calc_trend_residual">
+<span class="sig-name descname"><span class="pre">calc_trend_residual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beta0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.calc_trend_residual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_trend_residual" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the residual of the trend function (= the low fidelity Kriging)</p>
+<div class="math notranslate nohighlight">
+\[y_\text{HF samples} - \hat{y}_{lf}(x_\text{HF samples})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>beta0</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the hierarchical Kriging model. This is implicitly tuned by the optimization algorithm that tunes theta</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>residual of the trend function</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_hf_sampling_points, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.calc_variance">
+<span class="sig-name descname"><span class="pre">calc_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trend_res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_inv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.calc_variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_variance" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the variance for HK prediction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trend_res</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em>(</em><em>n_hf_sampling_points</em><em>, </em><em>1</em><em>)</em>) – <p>residual of the trend function (which is the low fidelity Kriging model)</p>
+<div class="math notranslate nohighlight">
+\[y_\text{HF samples} - \hat{y}_\text{LF}(x_\text{HF samples})\]</div>
+</p></li>
+<li><p><strong>R_inv</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_design_variables</em><em>, </em><em>n_design_variables</em><em>)</em>) – inverse of the correlation matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimated variance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.construct">
+<span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.construct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.construct" title="Link to this definition">#</a></dt>
+<dd><p>This method constructs the hierarchical Kriging model by minimizing the <a class="reference internal" href="#optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood" title="optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood"><code class="xref py py-func docutils literal notranslate"><span class="pre">neg_log_likelihood()</span></code></a> function using the DIRECT algorithm.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.kernel_cubic_spline">
+<span class="sig-name descname"><span class="pre">kernel_cubic_spline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.kernel_cubic_spline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_cubic_spline" title="Link to this definition">#</a></dt>
+<dd><p>Kernel for estimating the two-point correlation using a cubic spline.
+This formulation was used by Han and Görtz (2012) (DOI: 10.2514/1.J051354)
+For the test function that they used, the squared exponential kernel provides a better result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_i</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>1</em><em>, </em><em>n_design_variables</em><em>)</em>) – point in design space</p></li>
+<li><p><strong>x_j</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>1</em><em>, </em><em>n_design_variables</em><em>)</em>) – point in design space</p></li>
+<li><p><strong>theta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the Kriging model. This is tuned by an optimization algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimation of the two-point correlation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.kernel_exp">
+<span class="sig-name descname"><span class="pre">kernel_exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.kernel_exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_exp" title="Link to this definition">#</a></dt>
+<dd><p>Squared exponential kernel for approximating a two point correlation. This is the default Gaussian Process Regression Kernel in Dakota.</p>
+<div class="math notranslate nohighlight">
+\[R(x_i, x_j) = \text{exp} \left( - \sum_k^m \theta |x_{i,k} - x_{j,k}|^{p_k} \right)\]</div>
+<p>p_k is assumed to be constant for all k</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_i</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>1</em><em>, </em><em>n_design_variables</em><em>)</em>) – point in design space</p></li>
+<li><p><strong>x_j</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>1</em><em>, </em><em>n_design_variables</em><em>)</em>) – point in the design space</p></li>
+<li><p><strong>theta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the Kriging model. This is tuned by an optimization algorithm</p></li>
+<li><p><strong>p_k</strong> (<em>float</em><em>, </em><em>optional</em>) – degree of the exponential kernel (default = 2.0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimation of the two-point correlation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood">
+<span class="sig-name descname"><span class="pre">neg_log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.neg_log_likelihood"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood" title="Link to this definition">#</a></dt>
+<dd><p>Negative logarithmic likelihood function that is minimized.</p>
+<p>For obtaining the hierarchical Kriging parameters theta and beta0, the likelihood function is maximized.
+For numerical reasons, the logarithmic likelihood function is maximized. For this maximization, the
+DIRECT algorithm is used (following the Kriging implementation in Dakota). As this algorithm only supports
+minimization, the negative logarithmic likelihood function is calculated here. The mathematical formulation is given
+by Han and Görtz (2012) (DOI: 10.2514/1.J051354):</p>
+<div class="math notranslate nohighlight">
+\[- \text{ln}[L(\theta)] = n \text{ln}(\sigma^2(\theta)) - \text{ln}(|R(\theta)|)\]</div>
+<p>Note that minimization of this function yields an optimal theta and implicitly tunes the other parameter beta0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>theta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the hierarchical Kriging model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.predict" title="Link to this definition">#</a></dt>
+<dd><p>Predict the response of the underlying true function using the hierarchical Kriging model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>points</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_points</em><em>, </em><em>n_design_variables</em><em>)</em>) – points where the hierarchical Kriging model is to be evaluated</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predictions at the requested points</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray, shape (n_points, 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.hierarchicalKriging.store_coeffs">
+<span class="sig-name descname"><span class="pre">store_coeffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#hierarchicalKriging.store_coeffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.hierarchicalKriging.store_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>store optimal coefficients as data members of the class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>theta</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – parameter of the hierarchical Kriging model. This is tuned by an optimization algorithm</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="optimizationTools.surrogateModels.normalize_points">
+<span class="sig-prename descclassname"><span class="pre">optimizationTools.surrogateModels.</span></span><span class="sig-name descname"><span class="pre">normalize_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/optimizationTools/surrogateModels.html#normalize_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#optimizationTools.surrogateModels.normalize_points" title="Link to this definition">#</a></dt>
+<dd><p>Scale the input space (list of points) to form a unit hypercube centered at origin</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pts</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>n_sampling_points</em><em>, </em><em>n_design_variables</em><em>)</em>) – coordinates in the design space</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>scaled coordinates, scaling factors and biases</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="optimizationTools.surrogateTools.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">optimizationTools.surrogateTools package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../01_freecad_macros/macros.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Custom FreeCAD Macros</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogatemodels">surrogateModels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.GaussianProcessRegression"><code class="docutils literal notranslate"><span class="pre">GaussianProcessRegression</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.GaussianProcessRegression.predict"><code class="docutils literal notranslate"><span class="pre">GaussianProcessRegression.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.MSE"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.MSE()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_beta0"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_beta0()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_mat"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_correlation_mat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_correlation_vec"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_correlation_vec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_trend_residual"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_trend_residual()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.calc_variance"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.calc_variance()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.construct"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.construct()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_cubic_spline"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.kernel_cubic_spline()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.kernel_exp"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.kernel_exp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.neg_log_likelihood"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.neg_log_likelihood()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.predict"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.hierarchicalKriging.store_coeffs"><code class="docutils literal notranslate"><span class="pre">hierarchicalKriging.store_coeffs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizationTools.surrogateModels.normalize_points"><code class="docutils literal notranslate"><span class="pre">normalize_points()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raphael Strickling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

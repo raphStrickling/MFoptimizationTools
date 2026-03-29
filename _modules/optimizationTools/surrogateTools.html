@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>optimizationTools.surrogateTools &#8212; MF Optimization Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/optimizationTools/surrogateTools';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/00_intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="MF Optimization Tools - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="MF Optimization Tools - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/00_intro/intro.html">
+                    Getting Started
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">optimizationTools Package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.geometryTools.html">geometryTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.surrogateTools.html">surrogateTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/modules/optimizationTools.surrogateModels.html">surrogateModels</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FreeCAD</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/01_freecad_macros/macros.html">Custom macros</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for optimizationTools.surrogateTools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">surrogateTools</span>
+<span class="sd">==============</span>
+
+<span class="sd">This package contains useful tools for importing surrogate models from Dakota.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+
+
+<div class="viewcode-block" id="_polynomial">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools._polynomial">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_polynomial</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">exponent_mat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate a polynomial of the form</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        y(x) = \\sum_k c_k \\left(\\prod_i x_i ^{p_{k,i}} \\right)</span>
+
+<span class="sd">    :param x: point to evaluate</span>
+<span class="sd">    :type x: np.ndarray, shape (n_design_variables,)</span>
+<span class="sd">    :param coeffs: coefficients c_k in the polynomial</span>
+<span class="sd">    :type coeffs: np.ndarray, shape (n_bases,)</span>
+<span class="sd">    :param exponent_mat: matrix of exponents in the polynomial</span>
+<span class="sd">    :type exponent_mat: np.ndarray, shape (n_bases, n_design_variables)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># enable evaluation of multiple points (n_points, n_DV)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+    <span class="n">n_DV</span> <span class="o">=</span> <span class="n">exponent_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n_DV</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;x must contain all design variables (found number of design variables: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, expected </span><span class="si">{</span><span class="n">n_DV</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># vectorized exponentiation</span>
+    <span class="n">monomials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">**</span> <span class="n">exponent_mat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">monomials</span> <span class="o">@</span> <span class="n">coeffs</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_surfpack_gaussian_process">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools._surfpack_gaussian_process">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_surfpack_gaussian_process</span><span class="p">(</span><span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate objective function value using a gaussian process surrogate model.</span>
+
+<span class="sd">    :param parameters: dictionary containing the parameters for the kriging model. This dictionary can be obtained using the :py:func:`_parse_gaussian_process_input` function and the corresponding .alg file:</span>
+
+<span class="sd">        - **Xshift** (``np.ndarray`` of size (1, n_DV)): shift vector used for normalizing the design variables to [-0.5, 0.5]</span>
+<span class="sd">        - **Xmult** (``np.ndarray`` of size (1, n_DV)): normalization factors for normalizing the design variables to [-0.5, 0.5]</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            x_{i,\\text{scaled}} = \\frac{x_i - x_{i,\\text{shift}} }{x_{i,\\text{mult}}}</span>
+
+<span class="sd">        - **Yshift** (``float``): shift value for normalizing the dependent variable to [-0.5, 0.5]</span>
+<span class="sd">        - **Ymult** (``float``): normalization factor for normalizing the dependent variable to [-0.5, 0.5]</span>
+<span class="sd">        - **c** (``np.ndarray`` of size (1, n_bases)): Coefficients for trend function in GP</span>
+<span class="sd">        - **p** (``np.ndarray`` of size (n_bases, n_DV)): Exponents for trend function in GP</span>
+<span class="sd">        - **corr** (``np.ndarray`` of size (1, n_DV)): correlation vector</span>
+<span class="sd">        - **xbuild** (``np.ndarray`` of size (n_DV, n_samples): sampling points on which the kriging model was built</span>
+<span class="sd">        - **m** (``np.ndarray`` of size (n_samples, 1)): parameter</span>
+<span class="sd">    :return: function handle of the surrogate model. This function handle takes a vector of design variables as an argument.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Xshift</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Xshift&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Xmult</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Xmult&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Yshift</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Yshift&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Ymult</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Ymult&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;corr&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">xbuild</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;xbuild&quot;</span><span class="p">]</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+
+    <span class="n">n_DV</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Xshift</span><span class="p">)</span>  <span class="c1"># number of design variables</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Xshift</span><span class="p">,</span> <span class="n">Xmult</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Normalize x to be between -0.5 and 0.5</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">Xshift</span><span class="p">)</span> <span class="o">/</span> <span class="n">Xmult</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">squared_exp_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Squared exponential kernel for approximating a two-point correlation. This is the default Gaussian Process Regression Kernel in Dakota.</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            R(x, x_j) = \\text{exp} \\left( - \\sum_i^m \\theta_{i} (x_{i} - x_{i,j})^2 \\right)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># diff = x_i - x_ij</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">xbuild</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="c1"># sum diff^2 over n_DV (index i)</span>
+        <span class="n">exponent_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;jki,i-&gt;jk&quot;</span><span class="p">,</span> <span class="n">diff</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">corr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">exponent_sum</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">kriging</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a Kriging model using a trend function h, and a stationary random process Z</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            Y(x) = h(x) + Z(x)</span>
+
+<span class="sd">        The random process is modeled using the squared exponential kernel for approximation</span>
+<span class="sd">        the two-point correlation</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            Z(x) = \\sum_j^n R(x, x_j) * m_j</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n_DV</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;x must contain all design variables (found number of design variables: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, expected </span><span class="si">{</span><span class="n">n_DV</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">normalize_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Xshift</span><span class="p">,</span> <span class="n">Xmult</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">squared_exp_kernel</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">ynorm</span> <span class="o">=</span> <span class="n">_polynomial</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">R</span> <span class="o">@</span> <span class="n">m</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">Ymult</span> <span class="o">*</span> <span class="n">ynorm</span> <span class="o">+</span> <span class="n">Yshift</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">kriging</span></div>
+
+
+
+<div class="viewcode-block" id="_parse_gaussian_process_input">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools._parse_gaussian_process_input">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_gaussian_process_input</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract parameters for a Gaussian Process Regression surrogate model from an .alg file generated by Dakota.</span>
+
+<span class="sd">    :param path: path to .alg file containing the parameters for the Gaussian Process Regression surrogate model</span>
+<span class="sd">    :return: dictionary formatted for the function :py:func:`_surfpack_gaussian_process`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_DV</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_bases</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">linesLeft</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Xshift&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Xmult&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Yshift&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Ymult&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;corr&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;xbuild&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="n">activeVar</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputFile</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">inputFile</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">linesLeft</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">vector</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">:</span>
+                    <span class="n">vector</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">activeVar</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Yshift&quot;</span><span class="p">,</span> <span class="s2">&quot;Ymult&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">]:</span>
+                    <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">inputs</span><span class="p">[</span><span class="n">activeVar</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+                <span class="n">linesLeft</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="s2">&quot;inputs = &quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_DV</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="s2">&quot;bases = &quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_bases</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="s2">&quot;build = &quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="n">expectedShapes</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;Xshift&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_DV</span><span class="p">],</span>
+                <span class="s2">&quot;Xmult&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_DV</span><span class="p">],</span>
+                <span class="s2">&quot;Yshift&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;Ymult&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_bases</span><span class="p">],</span>
+                <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_bases</span><span class="p">,</span> <span class="n">n_DV</span><span class="p">],</span>
+                <span class="s2">&quot;corr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_DV</span><span class="p">],</span>
+                <span class="s2">&quot;xbuild&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_DV</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">],</span>
+                <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_samples</span><span class="p">],</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">var</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">activeVar</span> <span class="o">=</span> <span class="n">var</span>
+                    <span class="n">linesLeft</span> <span class="o">=</span> <span class="n">expectedShapes</span><span class="p">[</span><span class="n">activeVar</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># convert to numpy arrays with floats</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1"># make sure that everything has been found</span>
+        <span class="k">if</span> <span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">expectedShapes</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> should have shape </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">expectedShapes</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">, but has shape </span><span class="si">{</span><span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inputs</span></div>
+
+
+
+<div class="viewcode-block" id="_parse_surfpack_polynomial_input">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools._parse_surfpack_polynomial_input">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_surfpack_polynomial_input</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract parameters for a polynomial surrogate model from an .alg file generated by Dakota.</span>
+
+<span class="sd">    :param path: path to .alg file containing the parameters for the polynomial surrogate model</span>
+<span class="sd">    :return: dictionary formatted for the function :py:func:`_surfpack_polynomial`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_DV</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_bases</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">linesLeft</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="n">activeVar</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">inputFile</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">inputFile</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">linesLeft</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">vector</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">vector</span><span class="p">:</span>
+                    <span class="n">vector</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">inputs</span><span class="p">[</span><span class="n">activeVar</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+                <span class="n">linesLeft</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="s2">&quot;inputs = &quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_DV</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="s2">&quot;bases = &quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">n_bases</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="n">expectedShapes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_bases</span><span class="p">],</span> <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_bases</span><span class="p">,</span> <span class="n">n_DV</span><span class="p">]}</span>
+
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">var</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">activeVar</span> <span class="o">=</span> <span class="n">var</span>
+                    <span class="n">linesLeft</span> <span class="o">=</span> <span class="n">expectedShapes</span><span class="p">[</span><span class="n">activeVar</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># convert to numpy arrays with floats</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1"># make sure that everything has been found</span>
+        <span class="k">if</span> <span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">expectedShapes</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> should have shape </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">expectedShapes</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">, but has shape </span><span class="si">{</span><span class="n">inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inputs</span></div>
+
+
+
+<div class="viewcode-block" id="load_gaussian_process_surfpack">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools.load_gaussian_process_surfpack">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_gaussian_process_surfpack</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a gaussian process surrogate model that was constructed with Dakota using the surfpack format</span>
+
+<span class="sd">    :param path: path to .alg file that is generated by Dakota</span>
+<span class="sd">    :return: function handle of the surrogate model. This function handle takes a vector of design variables as an argument.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">_parse_gaussian_process_input</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_surfpack_gaussian_process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_polynomial_surfpack">
+<a class="viewcode-back" href="../../content/modules/optimizationTools.surrogateTools.html#optimizationTools.surrogateTools.load_polynomial_surfpack">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_polynomial_surfpack</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a polynomial surrogate model that was constructed with Dakota using the surfpack format</span>
+
+<span class="sd">    :param path: path to .alg file that is generated by Dakota</span>
+<span class="sd">    :return: function handle of the polynomial model. This function handle takes a vector of design variables as an argument.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">_parse_surfpack_polynomial_input</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">_polynomial</span><span class="p">,</span> <span class="n">coeffs</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">exponent_mat</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">])</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raphael Strickling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

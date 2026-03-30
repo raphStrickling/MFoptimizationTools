@@ -30,9 +30,13 @@ sphinx:
     project: "Optimization Tools"
 
 
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-# html:
-#   favicon: "content/figures/favicon.png"
-#   use_issues_button: true
-#   use_repository_button: true
+# Add GitHub button
+html:
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+
+repository:
+  url: https://github.com/raphStrickling/MFoptimizationTools
+  branch: main
+  path_to_book: doc

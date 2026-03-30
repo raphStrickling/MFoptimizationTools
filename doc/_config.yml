@@ -3,7 +3,7 @@
 
 title: MF Optimization Tools
 author: Raphael Strickling
-logo: content/figures/logo.svg
+logo: content/figures/logo.tiff
 copyright: "2026"
 
 exclude_patterns: [build, .DS_Store]

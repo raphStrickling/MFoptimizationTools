@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "Multi-fidelity Shape Optimization Toolbox"
+version: 1.0
+license: "MIT"
+type: software
+abstract: "Simulation-based multi-fidelity shape optimization using OpenFOAM, Dakota and FreeCAD. "
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Raphael
+    family-names: Strickling
+    affiliation: Technical University of Darmstadt
+    orcid: "https://orcid.org/0009-0004-0018-7589"
+keywords:
+  - Multi-fidelity Optimization
+  - Shape optimization
+  - Inverse design
+  - Burner design

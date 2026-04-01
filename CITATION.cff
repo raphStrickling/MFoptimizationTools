@@ -10,6 +10,14 @@ authors:
     family-names: Strickling
     affiliation: Technical University of Darmstadt
     orcid: "https://orcid.org/0009-0004-0018-7589"
+  - given-names: Faizan Habib
+    family-names: Vance
+    affiliation: Technical University of Darmstadt
+    orcid: "https://orcid.org/0000-0002-1353-0604"
+  - given-names: Arne
+    family-names: Scholtissek
+    affiliation: Technical University of Darmstadt
+    orcid: "https://orcid.org/0000-0002-6881-6888"
 keywords:
   - Multi-fidelity Optimization
   - Shape optimization
